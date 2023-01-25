@@ -16,7 +16,7 @@ class OrderListView(
     pagination_class = OrderLargePagination
 
     def get_queryset(self):
-        return Order.objects.order_by('id')
+        return Order.objects.order_by('-id')
        
 
     def get(self, request, *args, **kwargs):
