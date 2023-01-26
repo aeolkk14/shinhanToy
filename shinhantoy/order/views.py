@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Order, Comment
 from .paginations import OrderLargePagination
-from .serializers import OrderSerializer, CommentSerializer, CommentCreateSerializer
+from .serializers import OrderSerializer,OrderDetailSerializer, CommentSerializer, CommentCreateSerializer
 
 # Create your views here.
 
@@ -28,7 +28,7 @@ class OrderDetailView(
     mixins.UpdateModelMixin,
     generics.GenericAPIView
 ):
-    serializer_class = OrderSerializer
+    serializer_class = OrderDetailSerializer
 
     def get_queryset(self):
         return Order.objects.order_by('-id')

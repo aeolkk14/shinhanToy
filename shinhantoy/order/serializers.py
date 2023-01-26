@@ -12,6 +12,17 @@ class OrderSerializer(serializers.ModelSerializer):
             }
         }
 
+class OrderDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+        extra_kwargs = {
+            'id':{
+                'read_only': True
+            }
+        }
+
 class CommentSerializer(serializers.ModelSerializer):
     order_ord_no = serializers.SerializerMethodField()
     member_username = serializers.SerializerMethodField()
@@ -39,6 +50,9 @@ class CommentCreateSerializer(serializers.ModelSerializer):
         if not value.is_authenticated:
             raise serializers.ValidationError('member is required')
         return value
+
+    def get_order_id(self, obj):
+        return obj.order.pk
 
     class Meta:
         model=Comment
