@@ -55,7 +55,8 @@ class CommentListView(
 class CommentCreateView(
     mixins.CreateModelMixin,
     generics.GenericAPIView
-):
+):  
+    permission_classes=[IsAuthenticated]
     serializer_class = CommentCreateSerializer
     
 
